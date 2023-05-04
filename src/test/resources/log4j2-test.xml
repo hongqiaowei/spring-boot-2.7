@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright (C) 2023 Hong Qiaowei <hongqiaowei@163.com>. All rights reserved.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<Configuration status="INFO">
+    <properties>
+        <property name="APP_NAME">spring-boot-27</property>
+    </properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%highlight{[%X{traceId}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%-24t] %-5level %-40c{1} .%-25M :%-5L %msg%n}" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="DEBUG">
+			<AppenderRef ref="Console" />
+		</Root>
+		<Logger name="org.example" level="DEBUG" />
+		<Logger name="reactor.netty.http.client" level="DEBUG" />
+
+		<Logger name="org.hibernate.type.descriptor.sql.BasicBinder"    level="TRACE" />
+		<Logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="TRACE" />
+
+		<Logger name="org.hibernate.engine.QueryParameters"    level="DEBUG" />
+		<Logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />
+	</Loggers>
+</Configuration>

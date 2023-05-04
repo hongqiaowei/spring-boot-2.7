@@ -1,0 +1,111 @@
+#  Copyright (C) 2023 Hong Qiaowei <hongqiaowei@163.com>. All rights reserved.
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+#debug : true
+#trace : true
+
+spring :
+    application :
+        name       : ${APP_NAME}
+        version    : @project.version@  # pom的project.version
+        build.time : @timestamp@        # 程序的编译时间
+
+    main :
+        allow-bean-definition-overriding : true
+
+    jackson :
+        parser :
+            allow-single-quotes          : true
+            allow-unquoted-field-names   : true
+            allow-unquoted-control-chars : true
+
+        default-property-inclusion : NON_EMPTY
+
+        serialization :
+            write-enums-using-to-string : true
+            write-empty-json-arrays     : true
+            write-null-map-values       : true
+
+        deserialization :
+            read-enums-using-to-string : true
+            fail-on-numbers-for-enums  : true
+            fail-on-unknown-properties : false
+
+    codec :
+#       log-request-details : true
+        max-in-memory-size  : -1
+
+    redis :
+        client-type : lettuce
+        host        : 3.3.3.3
+        port        : 6379
+        password    : 123456
+        database    : 10
+        lettuce :
+            # false的原因参：
+            # https://redis.io/docs/manual/pipelining
+            # https://lettuce.io/core/release/reference/index.html#_connection_pooling
+            # https://developer.aliyun.com/article/1064562?spm=a2c6h.13262185.profile.8.17cb70983YGAls
+            # 之前工作中有性能测试，涉及lettuce，发现默认单连接，但性能不错
+            pool.enabled : false
+
+    datasource :
+        driver-class-name    : com.mysql.cj.jdbc.Driver
+        url                  : jdbc:mysql://6.6.6.6:3306/mkt_toolkit?useSSL=false&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&allowMultiQueries=true&rewriteBatchedStatements=true
+        username             : root
+        password             : root
+        type                 : com.zaxxer.hikari.HikariDataSource
+        generate-unique-name : false
+        name                 : SB2DataSource
+        # 可根据实际业务和资源调整hikari连接池参数
+        hikari :
+            pool-name             : SB2HikariPool
+            minimum-idle          : 2
+            connection-test-query : SELECT 1
+
+    jpa :
+        open-in-view : false
+        show-sql     : true     # just for test
+
+    # 配置spring boot的task executor
+    task :
+        execution :
+            # 可根据实际业务和资源配置线程池
+            pool :
+                max-size       : 64
+                queue-capacity : 200
+            shutdown :
+                await-termination : true
+
+logging.config : classpath:log4j2-dev.xml
+
+server :
+    # 可根据实际业务和资源调整http1.1配置
+    port : ${PORT:8080}
+#   compression :
+#       enabled           : true
+#       min-response-size : 2048
+
+    # 不启用spring boot的http2，JettyConfig.java会开启http2
+    # server.http2.port是自定义的，http2相关参JettyConfig.java
+    http2 :
+#       enabled : true
+        port    : 9090
+
+# 支持http1.1交互的org.springframework.web.reactive.function.client.WebClient实例的配置，参HTTP11WebClientConfig.java
+http11-webclient :
+    wiretap : true
+http2c-webclient :
+    wiretap : true
