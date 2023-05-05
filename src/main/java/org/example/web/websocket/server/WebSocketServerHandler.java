@@ -52,7 +52,7 @@ public class WebSocketServerHandler implements WebSocketHandler {
         // 演示每10s向所有websocket客户端发消息
         threadPoolTaskScheduler.scheduleAtFixedRate(
                 () -> {
-                    String message = "msg " + DateTimeUtils.convert(LocalDateTime.now(), Const.DP.DP19);
+                    String message = "msg " + DateTimeUtils.toString(LocalDateTime.now(), Const.DP.DP19);
                     broadcast(message);
                 },
                 Duration.ofSeconds(10)

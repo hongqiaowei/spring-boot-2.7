@@ -63,44 +63,49 @@ public abstract class DateTimeUtils {
         return toMillis(ldt);
     }
 
-    public static LocalDate transform(Date date) {
-        return date.toInstant().atZone(defaultZone).toLocalDate();
-    }
-
-    public static LocalDateTime transform(long l) {
+    public static LocalDateTime toLocalDateTime(long l) {
         return LocalDateTime.ofInstant(Instant.ofEpochMilli(l), defaultZone);
     }
 
-    public static LocalDateTime localDateTimeFrom(Date date) {
+    public static LocalDateTime toLocalDateTime(String dateTime, String pattern) {
+        DateTimeFormatter f = getDateTimeFormatter(pattern);
+        return LocalDateTime.parse(dateTime, f);
+    }
+
+    public static LocalDateTime toLocalDateTime(Date date) {
         return date.toInstant().atZone(defaultZone).toLocalDateTime();
     }
 
-    public static Date from(Instant i) {
-        return new Date(i.toEpochMilli());
+    public static LocalDate toLocalDate(Date date) {
+        return date.toInstant().atZone(defaultZone).toLocalDate();
     }
 
-    public static Date from(LocalDate localDate) {
-        return Date.from(localDate.atStartOfDay().atZone(defaultZone).toInstant());
-    }
-
-    public static Date from(LocalDateTime localDateTime) {
-        return Date.from(localDateTime.atZone(defaultZone).toInstant());
-    }
-
-    public static String convert(long mills, String pattern) {
+    public static String toString(long mills, String pattern) {
         LocalDateTime ldt = LocalDateTime.ofInstant(Instant.ofEpochMilli(mills), defaultZone);
         DateTimeFormatter f = getDateTimeFormatter(pattern);
         return ldt.format(f);
     }
 
-    public static String convert(LocalDate date, String pattern) {
+    public static String toString(LocalDate date, String pattern) {
         DateTimeFormatter f = getDateTimeFormatter(pattern);
         return date.format(f);
     }
 
-    public static String convert(LocalDateTime localDateTime, String pattern) {
+    public static String toString(LocalDateTime localDateTime, String pattern) {
         DateTimeFormatter f = getDateTimeFormatter(pattern);
         return localDateTime.format(f);
+    }
+
+    public static Date toDate(Instant i) {
+        return new Date(i.toEpochMilli());
+    }
+
+    public static Date toDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(defaultZone).toInstant());
+    }
+
+    public static Date toDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(defaultZone).toInstant());
     }
 
     public static List<String> datesBetween(String start, String end) {

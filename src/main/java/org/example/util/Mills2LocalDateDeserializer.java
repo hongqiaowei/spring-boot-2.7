@@ -36,7 +36,7 @@ public class Mills2LocalDateDeserializer extends JsonDeserializer<LocalDate> {
         if (StringUtils.isBlank(text)) {
             return null;
         }
-        LocalDateTime ldt = DateTimeUtils.transform(Long.parseLong(text));
+        LocalDateTime ldt = DateTimeUtils.toLocalDateTime(Long.parseLong(text));
         return ldt.toLocalDate();
     }
 }

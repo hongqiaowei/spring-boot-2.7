@@ -65,7 +65,7 @@ public class SB2ErrorController extends BasicErrorController {
         HttpStatus status = getStatus(request);
 
         Date timestamp = (Date) error.get("timestamp");
-        String convert = DateTimeUtils.convert(timestamp.getTime(), Const.DP.DP23);
+        String convert = DateTimeUtils.toString(timestamp.getTime(), Const.DP.DP23);
         error.put("timestamp", convert);
 
         String traceId = (String) request.getAttribute(Const.TRACE_ID);
