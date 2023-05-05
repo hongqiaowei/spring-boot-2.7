@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Configuration;
 public class SpELConfig {
 
     @Bean
-    public SB2CachedExpressionEvaluator defaultExpressionEvaluator() {
-        return new SB2CachedExpressionEvaluator();
+    public SB27CachedExpressionEvaluator defaultExpressionEvaluator() {
+        return new SB27CachedExpressionEvaluator();
     }
 }

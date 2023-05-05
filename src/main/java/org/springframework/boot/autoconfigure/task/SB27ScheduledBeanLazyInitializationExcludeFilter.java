@@ -20,5 +20,5 @@ package org.springframework.boot.autoconfigure.task;
 /**
  * @author Hong Qiaowei
  */
-public class SB2ScheduledBeanLazyInitializationExcludeFilter extends ScheduledBeanLazyInitializationExcludeFilter {
+public class SB27ScheduledBeanLazyInitializationExcludeFilter extends ScheduledBeanLazyInitializationExcludeFilter {
 }

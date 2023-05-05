@@ -34,7 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author Hong Qiaowei
  */
-public class SB2CachedExpressionEvaluator extends CachedExpressionEvaluator {
+public class SB27CachedExpressionEvaluator extends CachedExpressionEvaluator {
 
     private final Map<ExpressionKey, Expression>   expressionCache = new ConcurrentHashMap<>(32);
     private final Map<AnnotatedElementKey, Method> methodCache     = new ConcurrentHashMap<>(32);

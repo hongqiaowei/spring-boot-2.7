@@ -37,16 +37,16 @@ import java.util.Map;
 
 /**
  * 主要处理filter层面抛出的异常
- * @see SB2ControllerAdvice
+ * @see SB27ControllerAdvice
  * @author Hong Qiaowei
  */
-public class SB2ErrorController extends BasicErrorController {
+public class SB27ErrorController extends BasicErrorController {
 
-    public SB2ErrorController(ErrorAttributes errorAttributes, ErrorProperties errorProperties) {
+    public SB27ErrorController(ErrorAttributes errorAttributes, ErrorProperties errorProperties) {
         super(errorAttributes, errorProperties);
     }
 
-    public SB2ErrorController(ErrorAttributes errorAttributes, ErrorProperties errorProperties, List<ErrorViewResolver> errorViewResolvers) {
+    public SB27ErrorController(ErrorAttributes errorAttributes, ErrorProperties errorProperties, List<ErrorViewResolver> errorViewResolvers) {
         super(errorAttributes, errorProperties, errorViewResolvers);
     }
 

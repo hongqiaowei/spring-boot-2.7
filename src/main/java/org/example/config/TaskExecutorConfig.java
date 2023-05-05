@@ -25,7 +25,7 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.LazyInitializationExcludeFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.task.SB2ScheduledBeanLazyInitializationExcludeFilter;
+import org.springframework.boot.autoconfigure.task.SB27ScheduledBeanLazyInitializationExcludeFilter;
 import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.autoconfigure.task.TaskExecutionProperties;
 import org.springframework.boot.autoconfigure.task.TaskSchedulingProperties;
@@ -80,7 +80,7 @@ public class TaskExecutorConfig {
 
     @Configuration
     @EnableConfigurationProperties(TaskExecutionProperties.class)
-    static class SB2TaskExecutionConfig {
+    static class SB27TaskExecutionConfig {
 
         static final String APPLICATION_TASK_EXECUTOR_BEAN_NAME = "applicationTaskExecutor";
 
@@ -118,7 +118,7 @@ public class TaskExecutorConfig {
 
     @Configuration
     @EnableAsync
-    static class SB2AsyncConfig extends AsyncConfigurerSupport {
+    static class SB27AsyncConfig extends AsyncConfigurerSupport {
 
         @Resource(name = TaskExecutionAutoConfiguration.APPLICATION_TASK_EXECUTOR_BEAN_NAME)
         private ThreadPoolTaskExecutor threadPoolTaskExecutor;
@@ -146,7 +146,7 @@ public class TaskExecutorConfig {
     @Configuration
     @EnableConfigurationProperties(TaskSchedulingProperties.class)
     @EnableScheduling
-    static class SB2TaskSchedulingConfig {
+    static class SB27TaskSchedulingConfig {
 
         @Primary
         @Bean
@@ -158,7 +158,7 @@ public class TaskExecutorConfig {
         @Bean
         @ConditionalOnBean(name = TaskManagementConfigUtils.SCHEDULED_ANNOTATION_PROCESSOR_BEAN_NAME)
         public static LazyInitializationExcludeFilter scheduledBeanLazyInitializationExcludeFilter() {
-            return new SB2ScheduledBeanLazyInitializationExcludeFilter();
+            return new SB27ScheduledBeanLazyInitializationExcludeFilter();
         }
 
         @Primary

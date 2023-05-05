@@ -37,7 +37,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @ControllerAdvice
 @Order(Ordered.LOWEST_PRECEDENCE)
-public class SB2ResponseAdvice implements ResponseBodyAdvice<Object> {
+public class SB27ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {

@@ -22,7 +22,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.example.spel.SB2CachedExpressionEvaluator;
+import org.example.spel.SB27CachedExpressionEvaluator;
 import org.example.util.Const;
 import org.example.util.ThrowableUtils;
 import org.springframework.beans.BeansException;
@@ -45,11 +45,11 @@ import java.lang.reflect.Method;
 @Component
 public class RedisLockAspect implements ApplicationContextAware {
 
-    private ApplicationContext           applicationContext;
+    private ApplicationContext            applicationContext;
 
-    private SB2CachedExpressionEvaluator defaultExpressionEvaluator;
+    private SB27CachedExpressionEvaluator defaultExpressionEvaluator;
 
-    private RedisTemplateLockService     redisTemplateLockService;
+    private RedisTemplateLockService      redisTemplateLockService;
 
 
     // redisLock不能换成RedisLock
@@ -114,7 +114,7 @@ public class RedisLockAspect implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
-        defaultExpressionEvaluator = this.applicationContext.getBean(SB2CachedExpressionEvaluator.class);
+        defaultExpressionEvaluator = this.applicationContext.getBean(SB27CachedExpressionEvaluator.class);
         redisTemplateLockService   = this.applicationContext.getBean(RedisTemplateLockService.class);
     }
 }

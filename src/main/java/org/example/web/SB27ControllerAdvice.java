@@ -37,14 +37,14 @@ import java.util.Map;
 
 /**
  * 处理controller层面抛出的异常
- * @see SB2ErrorController
+ * @see SB27ErrorController
  * @author Hong Qiaowei
  */
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class SB2ControllerAdvice {
+public class SB27ControllerAdvice {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SB2ControllerAdvice.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SB27ControllerAdvice.class);
 
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<Result<Map<Object, Object>>> throwableHandler(HttpServletRequest request, Throwable throwable) {

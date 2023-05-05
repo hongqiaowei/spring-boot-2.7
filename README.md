@@ -88,9 +88,9 @@ spring boot 2.7内置的tomcat 9.0.x支持http2.0，但需要在操作系统本�
    
 7. 支持异步请求，某些场景可能需要（如长轮询（可考虑websocket，sse等替换）），spring boot基于内置容器已作封装，应用主要配置Executor处理请求。
 
-8. 若需统一响应体结构、设置公共响应头等，可通过SB2ResponseAdvice.java、Result.java实现。
+8. 若需统一响应体结构、设置公共响应头等，可通过SB27ResponseAdvice.java、Result.java实现。
 
-9. SB2ErrorController.java统一处理mvc异常，包括filter、controller抛出的，但controller抛出的异常，到达SB2ErrorController前，被HandlerExceptionResolver转换，导致源异常不清晰，因此加SB2ControllerAdvice.java处理controller异常。
+9. SB27ErrorController.java统一处理mvc异常，包括filter、controller抛出的，但controller抛出的异常，到达SB27ErrorController前，被HandlerExceptionResolver转换，导致源异常不清晰，因此加SB27ControllerAdvice.java处理controller异常。
 
 
 
