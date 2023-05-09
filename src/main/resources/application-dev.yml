@@ -23,7 +23,7 @@ spring :
         build.time : @timestamp@        # 程序的编译时间
 
     main :
-        allow-bean-definition-overriding : true
+        allow-bean-definition-overriding : false
 
     jackson :
         parser :
