@@ -47,7 +47,7 @@
         <java.version>1.8</java.version>
         <spring-framework.version>5.3.27</spring-framework.version>
         <spring-data-bom.version>2021.2.11</spring-data-bom.version>
-        <reactor-bom.version>2020.0.31</reactor-bom.version>
+        <reactor-bom.version>2020.0.32</reactor-bom.version>
         <netty.version>4.1.92.Final</netty.version>
         <slf4j.version>1.7.36</slf4j.version>
         <log4j2.version>2.17.2</log4j2.version>
