@@ -17,16 +17,17 @@
 
 package org.example.jpa;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import org.example.util.ThreadContext;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.query.spi.NativeQueryImplementor;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.LongType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Hong Qiaowei
@@ -75,5 +76,33 @@ public interface UserRepository extends BaseJpaRepository<User, Long> {
         }
 
         return userMap.values();
+    }
+
+    static final Map<String, String> alias_2_entity_class_field_map = ImmutableMap.of(
+                                                                                        "uid",   "org.example.jpa.User[id]",
+                                                                                        "uname", "org.example.jpa.User[name]",
+                                                                                        "rid",   "org.example.jpa.Role[id]",
+                                                                                        "rname", "org.example.jpa.Role[name]"
+                                                                      );
+
+    public default List<?> sb27AliasToEntityResultTransformer() {
+        SessionImplementor session = getSession();
+        NativeQueryImplementor nativeQuery = session.createNativeQuery(
+                                                    "SELECT   u.id as uid, u.name as uname, age, r.id as rid, r.name as rname " +
+                                                    "FROM     t_user u, t_user_role ur, t_role r                              " +
+                                                    "WHERE    u.id = ur.usr  and  ur.role = r.id  and  u.id = ?               "
+                                             );
+        nativeQuery.setParameter(1, 10);
+
+        nativeQuery.addScalar("uid",   LongType.INSTANCE)
+                   .addScalar("uname")
+                   .addScalar("age",   IntegerType.INSTANCE)
+                   .addScalar("rid",   LongType.INSTANCE)
+                   .addScalar("rname");
+
+        List<Class<?>> entityClasses = Lists.newArrayList(User.class, Role.class);
+        SB27AliasToEntityResultTransformer transformer = new SB27AliasToEntityResultTransformer(entityClasses, alias_2_entity_class_field_map);
+        nativeQuery.setResultTransformer(transformer);
+        return nativeQuery.list();
     }
 }

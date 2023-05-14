@@ -217,6 +217,24 @@ public class UserRepositoryTests {
             scripts        = "/org/example/jpa/dropTable.sql",
             executionPhase = AFTER_TEST_METHOD
     )
+    void sb27AliasToEntityResultTransformerTest() {
+        List<?> rows = userRepository.sb27AliasToEntityResultTransformer();
+        userRepository.getEntityManager().flush();
+        Object[] entities = (Object[]) rows.get(1);
+        Role role = (Role) entities[1];
+        assertEquals("role21", role.getName());
+    }
+
+
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    @Sql({"/org/example/jpa/createTable.sql", "/org/example/jpa/data.sql"})
+    @Sql(
+            scripts        = "/org/example/jpa/dropTable.sql",
+            executionPhase = AFTER_TEST_METHOD
+    )
     void dynamicUpdate() {
 
         CriteriaBuilder cb = userRepository.getCriteriaBuilder();

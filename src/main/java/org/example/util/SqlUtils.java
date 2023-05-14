@@ -15,36 +15,31 @@
  *  along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.example.jpa;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
+package org.example.util;
 
 /**
  * @author Hong Qiaowei
  */
-@Entity
-@Table(name = "t_user_role")
-public class UserRole extends RootEntity {
+public abstract class SqlUtils {
 
-    private Long usr;
-
-    private Long role;
-
-
-    public Long getUsr() {
-        return usr;
+    private SqlUtils() {
     }
 
-    public void setUsr(Long usr) {
-        this.usr = usr;
-    }
-
-    public Long getRole() {
-        return role;
-    }
-
-    public void setRole(Long role) {
-        this.role = role;
+    public static String toCamelCase(String column, char separator) {
+        // column = column.toLowerCase();
+        StringBuilder b = new StringBuilder(column.length());
+        boolean toUpperCase = false;
+        for (int i = 0; i < column.length(); i++) {
+            char c = column.charAt(i);
+            if (c == separator) {
+                toUpperCase = true;
+            } else if (toUpperCase) {
+                b.append(Character.toUpperCase(c));
+                toUpperCase = false;
+            } else {
+                b.append(c);
+            }
+        }
+        return b.toString();
     }
 }
