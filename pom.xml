@@ -55,6 +55,7 @@
         <conscrypt-openjdk.version>2.5.2</conscrypt-openjdk.version>
         <snakeyaml.version>1.33</snakeyaml.version>
         <jmh.version>1.36</jmh.version>
+        <commons-codec.version>1.16.0</commons-codec.version>
         <commons-lang3.version>3.13.0</commons-lang3.version>
     </properties>
 
