@@ -45,6 +45,7 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         <java.version>1.8</java.version>
+        <jetty.version>9.4.52.v20230823</jetty.version>
         <spring-framework.version>5.3.29</spring-framework.version>
         <spring-data-bom.version>2021.2.15</spring-data-bom.version>
         <reactor-bom.version>2020.0.35</reactor-bom.version>
