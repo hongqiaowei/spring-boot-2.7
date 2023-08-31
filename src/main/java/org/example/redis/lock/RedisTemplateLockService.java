@@ -106,11 +106,11 @@ public class RedisTemplateLockService implements LockService, MessageListener {
         return lock;
     }
 
-    private boolean doLock(String name, RedisScript<Long> scritpt, long waitTime, long leaseTime) {
+    private boolean doLock(String name, RedisScript<Long> script, long waitTime, long leaseTime) {
         long begin = 0;
         while (true) {
             Long ttl = redisTemplate.execute(
-                                                scritpt,
+                                                script,
                                                 argsSerializer,
                                                 longResultSerializer,
                                                 singletonList(name),
