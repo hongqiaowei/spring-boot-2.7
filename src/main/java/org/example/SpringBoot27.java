@@ -247,7 +247,7 @@ public class SpringBoot27 {
         System.setProperty("log4j2.formatMsgNoLookups",            "true");
         System.setProperty("log4j2.isThreadContextMapInheritable", "true");
 
-        List<String> argList = Stream.of(args).collect(Collectors.toList());
+        List<String> argList = Stream.of(args).toList();
         String[] runOpts = argList.toArray(new String[0]);
 
         SpringApplication sr = new SpringApplication(SpringBoot27.class);
