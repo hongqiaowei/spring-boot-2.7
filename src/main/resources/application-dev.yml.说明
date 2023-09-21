@@ -13,11 +13,14 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+#debug : true
+#trace : true
+
 spring :
     application :
         name       : ${APP_NAME}
-        version    : @project.version@
-        build.time : @timestamp@
+        version    : @project.version@  # pom的project.version
+        build.time : @timestamp@        # 程序的编译时间
 
     main :
         allow-bean-definition-overriding : false
@@ -41,7 +44,8 @@ spring :
             fail-on-unknown-properties : false
 
     codec :
-        max-in-memory-size : -1
+#       log-request-details : true
+        max-in-memory-size  : -1
 
     redis :
         client-type : lettuce
@@ -50,6 +54,11 @@ spring :
         password    : redis
         database    : 10
         lettuce :
+            # false的原因参：
+            # https://redis.io/docs/manual/pipelining
+            # https://lettuce.io/core/release/reference/index.html#_connection_pooling
+            # https://developer.aliyun.com/article/1064562?spm=a2c6h.13262185.profile.8.17cb70983YGAls
+            # 之前工作中有性能测试，涉及lettuce，发现默认单连接，但性能不错
             pool.enabled : false
 
     datasource :
@@ -60,6 +69,7 @@ spring :
         type                 : com.zaxxer.hikari.HikariDataSource
         generate-unique-name : false
         name                 : SB2DataSource
+        # 可根据实际业务和资源调整hikari连接池参数
         hikari :
             pool-name             : SB2HikariPool
             minimum-idle          : 2
@@ -67,10 +77,12 @@ spring :
 
     jpa :
         open-in-view : false
-        show-sql     : true
+        show-sql     : true     # just for test
 
+    # 配置spring boot的task executor
     task :
         execution :
+            # 可根据实际业务和资源配置线程池
             pool :
                 max-size       : 64
                 queue-capacity : 200
@@ -80,10 +92,19 @@ spring :
 logging.config : classpath:log4j2-dev.xml
 
 server :
+    # 可根据实际业务和资源调整http1.1配置
     port : ${PORT:8080}
-    http2 :
-        port : 9090
+#   compression :
+#       enabled           : true
+#       min-response-size : 2048
 
+    # 不启用spring boot的http2，JettyConfig.java会开启http2
+    # server.http2.port是自定义的，http2相关参JettyConfig.java
+    http2 :
+#       enabled : true
+        port    : 9090
+
+# 支持http1.1交互的org.springframework.web.reactive.function.client.WebClient实例的配置，参HTTP11WebClientConfig.java
 http11-webclient :
     wiretap : true
 http2c-webclient :
