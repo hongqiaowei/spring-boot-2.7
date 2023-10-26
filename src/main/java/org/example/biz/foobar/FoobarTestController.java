@@ -45,7 +45,7 @@ public class FoobarTestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(FoobarTestController.class);
 
     @PostMapping(value = "/httpTest")
-    public ResponseEntity<Map<String, String>> http2test(HttpServletRequest request, @RequestHeader(name = "h1") String header1, @RequestBody Map<String, String> body) {
+    public ResponseEntity<Map<String, String>> httpTest(HttpServletRequest request, @RequestHeader(name = "h1") String header1, @RequestBody Map<String, String> body) {
         String traceId = (String) request.getAttribute(Const.TRACE_ID);
         String protocol = request.getProtocol();
         body.put(Const.TRACE_ID, traceId);
