@@ -76,7 +76,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @Bean
-    public SB27ErrorController sb2ErrorController(ServerProperties serverProperties, ErrorAttributes errorAttributes, ObjectProvider<ErrorViewResolver> errorViewResolvers) {
+    public SB27ErrorController sb27ErrorController(ServerProperties serverProperties, ErrorAttributes errorAttributes, ObjectProvider<ErrorViewResolver> errorViewResolvers) {
         return new SB27ErrorController(errorAttributes, serverProperties.getError(), errorViewResolvers.orderedStream().collect(Collectors.toList()));
     }
 
